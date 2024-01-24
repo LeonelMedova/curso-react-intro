@@ -1,13 +1,19 @@
 import React from "react";
+import { TodoContext } from "../TodoContext";
 import "./TodoCounter.css";
 
-function TodoCounter({ total, completed }) {
-    let message;
-    const messageSpan = <>Has completado <span>{completed}</span> de <span>{total}</span> TODOs</>
+function TodoCounter() {
+    const {
+        completedTodos,
+        totalTodos,
+    } = React.useContext(TodoContext);
 
-    if (total === 0) {
+    let message;
+    const messageSpan = <>Has completado <span>{completedTodos}</span> de <span>{totalTodos}</span> TODOs</>
+
+    if (totalTodos === 0) {
         message = "No hay tareas pendientes.";
-    } else if (total === completed) {
+    } else if (totalTodos === completedTodos) {
         message = "🎉¡Felicidades, completaste todos los TODOs!🎉";
     } else {
         message = messageSpan;
